@@ -32,7 +32,7 @@ CREATE TABLE [ELT].[IngestInstance] (
 
 GO
 
-CREATE NONCLUSTERED INDEX [UI_IngestInstance]
+CREATE UNIQUE NONCLUSTERED INDEX [UI_IngestInstance]
     ON [ELT].[IngestInstance]([DestinationRawFileSystem] ASC, [DestinationRawFolder] ASC, [DestinationRawFile] ASC, [DestinationRawTable] ASC);
 
 

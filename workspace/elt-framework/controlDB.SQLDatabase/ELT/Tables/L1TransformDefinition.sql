@@ -37,8 +37,8 @@ CREATE TABLE [ELT].[L1TransformDefinition] (
 
 GO
 
-CREATE NONCLUSTERED INDEX [UI_L1TransformDefinition]
-    ON [ELT].[L1TransformDefinition]([InputRawFileSystem] ASC, [InputRawFileFolder] ASC, [InputRawFile] ASC, [InputRawTable] ASC, [OutputL1CurateFileSystem] ASC, [OutputL1CuratedFolder] ASC, [OutputL1CuratedFile] ASC);
+CREATE UNIQUE NONCLUSTERED INDEX [UI_L1TransformDefinition]
+    ON [ELT].[L1TransformDefinition]([InputRawFileSystem] ASC, [InputRawFileFolder] ASC, [InputRawFile] ASC, [InputRawTable] ASC, [OutputL1CurateFileSystem] ASC, [OutputL1CuratedFolder] ASC, [OutputL1CuratedFile] ASC, [OutputDWTable] ASC);
 
 
 GO

@@ -41,6 +41,7 @@ CREATE TABLE [ELT].[L1TransformInstance] (
     [DataFromTimestamp]            DATETIME2 (7)    NULL,
     [DataToTimestamp]              DATETIME2 (7)    NULL,
     CONSTRAINT [PK_L1TransformInstance] PRIMARY KEY CLUSTERED ([L1TransformInstanceID] ASC),
+    CONSTRAINT [CC_L1TransformInstance_InputSource] CHECK ([InputRawFileSystem] IS NOT NULL AND [InputRawFileFolder] IS NOT NULL AND [InputRawFile] IS NOT NULL AND [InputRawTable] IS NULL OR [InputRawTable] IS NOT NULL AND [InputRawFileSystem] IS NULL AND [InputRawFileFolder] IS NULL AND [InputRawFile] IS NULL),
     CONSTRAINT [CC_L1TransformInstance_L1TransformStatus] CHECK ([L1TransformStatus]='ReRunFailure' OR [L1TransformStatus]='ReRunSuccess' OR [L1TransformStatus]='Running' OR [L1TransformStatus]='DWUpload' OR [L1TransformStatus]='Failure' OR [L1TransformStatus]='Success'),
     CONSTRAINT [CC_L1TransformInstance_OutputDWTableWriteMode] CHECK ([OutputDWTableWriteMode]='append' OR [OutputDWTableWriteMode]='overwrite' OR [OutputDWTableWriteMode]='error' OR [OutputDWTableWriteMode]='errorifexists' OR [OutputDWTableWriteMode]='ignore'),
     CONSTRAINT [CC_L1TransformInstance_OutputL1CuratedFileWriteMode] CHECK ([OutputL1CuratedFileWriteMode]='append' OR [OutputL1CuratedFileWriteMode]='overwrite' OR [OutputL1CuratedFileWriteMode]='ignore' OR [OutputL1CuratedFileWriteMode]='error' OR [OutputL1CuratedFileWriteMode]='errorifexists'),
@@ -52,7 +53,7 @@ CREATE TABLE [ELT].[L1TransformInstance] (
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX [UI_L1TransformInstance]
-    ON [ELT].[L1TransformInstance]([InputRawFileSystem] ASC, [InputRawFileFolder] ASC, [InputRawFile] ASC, [InputRawTable] ASC, [DataFromTimestamp] ASC, [DataToTimestamp] ASC, [OutputL1CurateFileSystem] ASC, [OutputL1CuratedFolder] ASC, [OutputL1CuratedFile] ASC);
+    ON [ELT].[L1TransformInstance]([InputRawFileSystem] ASC, [InputRawFileFolder] ASC, [InputRawFile] ASC, [InputRawTable] ASC, [DataFromTimestamp] ASC, [DataToTimestamp] ASC, [OutputL1CurateFileSystem] ASC, [OutputL1CuratedFolder] ASC, [OutputL1CuratedFile] ASC, [OutputDWTable] ASC);
 
 
 GO
