@@ -36,7 +36,7 @@ from delta.tables import *
 from pyspark.sql.functions import *
 import json
 from pyspark.sql import DataFrame
-from datetime import datetime
+import datetime
 
 spark.conf.set("spark.sql.parquet.vorder.enabled", "true")
 spark.conf.set("spark.microsoft.delta.optimizeWrite.enabled", "true")
@@ -519,18 +519,18 @@ def readMirrorDBTable(
         if not isinstance(param_value, str) or not param_value.strip():
             raise ValueError(f"Parameter '{param_name}' is required and must be a non-empty string.")
 
-    # ---- Validation for watermark usage ----
-    if (fromTimeStamp or toTimeStamp) and not watermarkColumnName:
-        raise ValueError(
-            "Parameter 'watermarkColumnName' is required when "
-            "'fromTimeStamp' or 'toTimeStamp' is provided."
-        )
+    # # ---- Validation for watermark usage ----
+    # if (fromTimeStamp or toTimeStamp) and not watermarkColumnName:
+    #     raise ValueError(
+    #         "Parameter 'watermarkColumnName' is required when "
+    #         "'fromTimeStamp' or 'toTimeStamp' is provided."
+    #     )
 
     # ---- Validation: fromTimeStamp must be earlier than toTimeStamp ----
     if fromTimeStamp and toTimeStamp:
         try:
-            from_dt = datetime.fromisoformat(fromTimeStamp)
-            to_dt = datetime.fromisoformat(toTimeStamp)
+            from_dt = datetime.datetime.fromisoformat(fromTimeStamp)
+            to_dt = datetime.datetime.fromisoformat(toTimeStamp)
         except ValueError:
             raise ValueError(
                 "fromTimeStamp and toTimeStamp must be ISO-8601 datetime strings, "
