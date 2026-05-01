@@ -1,7 +1,7 @@
 name: Deploy Fabric Accelerator
 on: workflow_dispatch 
 env:
-  FABRIC_CAPACITY_NAME: BTFabric
+  FABRIC_CAPACITY_NAME: btfabric
   FABRIC_CAPACITY_LOCATION: uksouth
   FABRIC_CAPACITY_SKU: F2
   FABRIC_CAPACITY_ADMIN_ID: fdabacd0-0f32-4685-9ac6-e8f6478e1257
